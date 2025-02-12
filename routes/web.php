@@ -20,4 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 
-Route::get('/admin/login',[AdminLoginController::class, 'index'])->name('admin.login');
+
+// Group Route 
+
+Route::group(['prefix' => 'admin'],function(){
+
+    Route::group(['middleware' => 'guest'],function(){
+        Route::get('/login',[AdminLoginController::class, 'index'])->name('admin.login');
+    });
+
+    Route::group(['middleware' => 'auth'],function(){
+
+    });
+});
