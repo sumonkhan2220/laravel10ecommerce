@@ -20,7 +20,9 @@
     <section class="content">
         <!-- Default box -->
         <div class="container-fluid">
-            <div class="card">
+
+            <form action="" method="POST" id="categoryForm" name="categoryForm">
+                <div class="card">
                 <div class="card-body">								
                     <div class="row">
                         <div class="col-md-6">
@@ -34,14 +36,25 @@
                                 <label for="email">Slug</label>
                                 <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">	
                             </div>
-                        </div>									
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="status">Status</label>
+                                <select name="status" id="slug" class="form-control">
+                                    <option value="1">Active</option>
+                                    <option value="0">Block</option>
+                                </select>	
+                            </div>
+                        </div>
                     </div>
                 </div>							
-            </div>
-            <div class="pb-5 pt-3">
-                <button class="btn btn-primary">Create</button>
-                <a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
-            </div>
+                </div>
+                <div class="pb-5 pt-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a href="#" class="btn btn-outline-dark ml-3">Cancel</a>
+                </div>
+            </form>
         </div>
         <!-- /.card -->
     </section>
@@ -53,6 +66,23 @@
 
 @section('customJs')
     <script>
-       
+       $("#categoryForm").submit(function(event){
+            event.preventDefault();
+       });
+
+       $.ajax({
+        url: '{{route("categories.store")}}',
+        type: 'post',
+        data: '',
+        dataType: 'json',
+        success: function(response){
+
+        },error: function(jqXHR, exception){
+           console.log("Something went wron");
+            
+        };
+        
+
+       })
     </script>
 @endsection
